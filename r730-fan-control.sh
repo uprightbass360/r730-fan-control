@@ -24,8 +24,8 @@ WINTER_MONTHS="${WINTER_MONTHS:-12 1 2}"    # Dec, Jan, Feb
 # --- Fan speeds (hex percent) -----------------------------------------------
 WINTER_DAY="${WINTER_DAY:-0x19}"      # 25%
 WINTER_NIGHT="${WINTER_NIGHT:-0x14}"  # 20%
-SUMMER_DAY="${SUMMER_DAY:-0x26}"      # 38%
-SUMMER_NIGHT="${SUMMER_NIGHT:-0x1e}"  # 30%
+SUMMER_DAY="${SUMMER_DAY:-0x1e}"      # 30%
+SUMMER_NIGHT="${SUMMER_NIGHT:-0x19}"  # 25%
 
 # --- Failsafe thresholds (degrees C) ----------------------------------------
 # At/above either MAX: revert to iDRAC automatic control.

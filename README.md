@@ -19,7 +19,7 @@ Every 5 minutes a systemd timer runs `r730-fan-control.sh` on the R730:
    | | Day (08:00–19:59) | Night |
    |---|---|---|
    | Winter (Dec–Feb) | 25% | 20% |
-   | Other months | 38% | 30% |
+   | Other months | 30% | 25% |
 
 ## Install
 
