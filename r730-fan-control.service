@@ -1,0 +1,7 @@
+[Unit]
+Description=R730 scheduled fan control with temperature failsafe
+After=multi-user.target
+
+[Service]
+Type=oneshot
+ExecStart=/usr/local/bin/r730-fan-control.sh

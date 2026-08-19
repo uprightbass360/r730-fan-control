@@ -1,0 +1,6 @@
+[Unit]
+Description=Return R730 fan control to iDRAC automatic mode
+
+[Service]
+Type=oneshot
+ExecStart=/usr/bin/ipmitool raw 0x30 0x30 0x01 0x01
