@@ -1,7 +1,7 @@
 # r730-fan-control
 
 Scheduled manual fan control for a Dell R730 with a temperature failsafe,
-companion to [md1200-reduce-fans-systemd](https://github.com/tonybaltovski/md1200-reduce-fans-systemd)
+companion to [md1200-fan-control](https://github.com/uprightbass360/md1200-fan-control-systemd)
 for the JBOD.
 
 ## What it does
