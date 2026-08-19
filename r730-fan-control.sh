@@ -4,28 +4,37 @@
 # Runs on the R730 itself via the kernel IPMI interface (/dev/ipmi0).
 set -u
 
-IPMITOOL="${IPMITOOL:-/usr/bin/ipmitool}"
 TAG="r730-fan-control"
 
+# Overrides live in /etc/default/r730-fan-control; every knob below falls back
+# to its built-in default when unset there.
+CONFIG="${R730_FAN_CONFIG:-/etc/default/r730-fan-control}"
+if [ -r "$CONFIG" ]; then
+    # shellcheck source=/dev/null
+    . "$CONFIG"
+fi
+
+IPMITOOL="${IPMITOOL:-/usr/bin/ipmitool}"
+
 # --- Schedule ---------------------------------------------------------------
-DAY_START=8            # day begins 08:00
-DAY_END=20             # day ends 19:59
-WINTER_MONTHS="12 1 2" # Dec, Jan, Feb
+DAY_START="${DAY_START:-8}"                 # day begins 08:00
+DAY_END="${DAY_END:-20}"                    # day ends 19:59
+WINTER_MONTHS="${WINTER_MONTHS:-12 1 2}"    # Dec, Jan, Feb
 
 # --- Fan speeds (hex percent) -----------------------------------------------
-WINTER_DAY=0x19    # 25%
-WINTER_NIGHT=0x14  # 20%
-SUMMER_DAY=0x26    # 38%
-SUMMER_NIGHT=0x1e  # 30%
+WINTER_DAY="${WINTER_DAY:-0x19}"      # 25%
+WINTER_NIGHT="${WINTER_NIGHT:-0x14}"  # 20%
+SUMMER_DAY="${SUMMER_DAY:-0x26}"      # 38%
+SUMMER_NIGHT="${SUMMER_NIGHT:-0x1e}"  # 30%
 
 # --- Failsafe thresholds (degrees C) ----------------------------------------
 # At/above either MAX: revert to iDRAC automatic control.
 # At/below both RESUME: safe to (re)apply manual control.
 # In between: leave whatever mode is active alone (hysteresis, no flapping).
-EXHAUST_MAX=45
-CPU_MAX=75
-EXHAUST_RESUME=40
-CPU_RESUME=68
+EXHAUST_MAX="${EXHAUST_MAX:-45}"
+CPU_MAX="${CPU_MAX:-75}"
+EXHAUST_RESUME="${EXHAUST_RESUME:-40}"
+CPU_RESUME="${CPU_RESUME:-68}"
 
 # HOUR_OVERRIDE / MONTH_OVERRIDE exist for testing the schedule logic.
 HOUR="${HOUR_OVERRIDE:-$(date +%-H)}"

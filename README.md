@@ -21,8 +21,6 @@ Every 5 minutes a systemd timer runs `r730-fan-control.sh` on the R730:
    | Winter (Dec–Feb) | 25% | 20% |
    | Other months | 38% | 30% |
 
-Speeds, thresholds, and schedule are variables at the top of the script.
-
 ## Install
 
 Copy this directory to the R730, then as root:
@@ -30,6 +28,15 @@ Copy this directory to the R730, then as root:
 ```sh
 ./install.sh
 ```
+
+## Configure
+
+Speeds, thresholds, and the day/winter schedule are set in
+`/etc/default/r730-fan-control` (seeded from `r730-fan-control.env` on first
+install, then left alone — your tuning survives re-installs and updates).
+Uncomment a variable to override its built-in default; changes apply on the
+next timer run, within 5 minutes. The run interval itself lives in the timer:
+`systemctl edit r730-fan-control.timer`.
 
 ## Watch it
 

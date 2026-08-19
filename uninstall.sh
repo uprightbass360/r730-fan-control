@@ -17,3 +17,6 @@ rm -f /usr/local/bin/r730-fan-control.sh \
 systemctl daemon-reload
 
 echo "removed — fans are back under iDRAC automatic control"
+if [ -e /etc/default/r730-fan-control ]; then
+    echo "kept /etc/default/r730-fan-control (your tuning) — delete it manually if unwanted"
+fi

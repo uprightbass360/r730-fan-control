@@ -24,6 +24,11 @@ install -m 755 r730-fan-control.sh /usr/local/bin/r730-fan-control.sh
 install -m 644 r730-fan-control.service r730-fan-control.timer r730-fan-auto.service \
     /etc/systemd/system/
 
+# Seed the config file only if absent, so tuning survives re-installs.
+if [ ! -e /etc/default/r730-fan-control ]; then
+    install -m 644 r730-fan-control.env /etc/default/r730-fan-control
+fi
+
 systemctl daemon-reload
 systemctl enable --now r730-fan-control.timer
 systemctl start r730-fan-control.service
